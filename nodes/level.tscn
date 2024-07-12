@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://cidp08w5u75s5"]
+
+[ext_resource type="Texture2D" uid="uid://q0x1xoutvndf" path="res://asset/background-blue.png" id="1_4eueg"]
+[ext_resource type="Script" path="res://nodes/level.gd" id="1_gi2pq"]
+[ext_resource type="PackedScene" uid="uid://bl1orx21ijmw7" path="res://nodes/player.tscn" id="2_b34ht"]
+[ext_resource type="PackedScene" uid="uid://2y3klr4rr3j7" path="res://nodes/metroids.tscn" id="3_4i1hs"]
+[ext_resource type="PackedScene" uid="uid://dggn6vjavjohi" path="res://nodes/ui.tscn" id="5_pw83n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emgfy"]
+size = Vector2(128, 729)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0v112"]
+size = Vector2(1330, 74)
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_gi2pq")
+
+[node name="Background-blue" type="Sprite2D" parent="."]
+position = Vector2(640, 359)
+scale = Vector2(3.3125, 1.8825)
+texture = ExtResource("1_4eueg")
+
+[node name="player" parent="." instance=ExtResource("2_b34ht")]
+position = Vector2(259, 224)
+
+[node name="metroids" parent="." instance=ExtResource("3_4i1hs")]
+position = Vector2(612, 303)
+
+[node name="Borders" type="Node2D" parent="."]
+light_mask = 4
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(-64, 360)
+shape = SubResource("RectangleShape2D_emgfy")
+disabled = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2"]
+position = Vector2(1344, 360)
+shape = SubResource("RectangleShape2D_emgfy")
+disabled = true
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3"]
+position = Vector2(656, -40)
+shape = SubResource("RectangleShape2D_0v112")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4"]
+position = Vector2(648, 760)
+shape = SubResource("RectangleShape2D_0v112")
+
+[node name="metroidstimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="meteors" type="Node2D" parent="."]
+
+[node name="lasers" type="Node2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("5_pw83n")]
+
+[connection signal="laser" from="player" to="." method="_on_player_laser"]
+[connection signal="timeout" from="metroidstimer" to="." method="_on_metroidstimer_timeout"]

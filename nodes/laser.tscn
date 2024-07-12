@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu3hl1agf7g0h"]
+
+[ext_resource type="Texture2D" uid="uid://dxayqhgsbw61k" path="res://asset/pixel_laser_yellow.png" id="1_7u0g1"]
+[ext_resource type="Script" path="res://nodes/laser.gd" id="1_jwqb4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maaip"]
+size = Vector2(10.8696, 30.2586)
+
+[node name="laser" type="Node2D"]
+script = ExtResource("1_jwqb4")
+
+[node name="PixelLaserYellow" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 2)
+scale = Vector2(0.92, 1.28889)
+texture = ExtResource("1_7u0g1")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.92, 1.28889)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_maaip")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

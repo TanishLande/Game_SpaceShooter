@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://dggn6vjavjohi"]
+
+[ext_resource type="Script" path="res://nodes/ui.gd" id="1_p24iu"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_h5kkk"]
+
+[node name="UI" type="CanvasLayer" groups=["ui"]]
+script = ExtResource("1_p24iu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_right = 42.0
+offset_bottom = 51.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 10
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.984314, 0.952941, 0.988235, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxLine_h5kkk")
+text = "0"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+offset_left = 4.0
+offset_top = 615.0
+offset_right = 421.0
+offset_bottom = 720.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Timerscore" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timerscore" to="." method="_on_timerscore_timeout"]
